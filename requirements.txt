@@ -1,2 +1,2 @@
 streamlit
-solana_agent_kit_py
+solana-agent-kit-py
