@@ -1,10 +1,12 @@
 import streamlit as st
-from solana_agent_kit import Agent
-from solana_agent_kit.wallet import WalletConnector
-from solana.rpc.api import Client
-from solana.transaction import Transaction
-from solana_agent_kit.token import Token
-from solana_agent_kit.raydium import RaydiumPool
+from solana_agent_kit import SolanaAgentKit
+
+async def main():
+    agent = SolanaAgentKit(
+        "your-wallet-private-key-as-base58",
+        "https://api.mainnet-beta.solana.com",
+        "your-openai-api-key"
+    )
 
 # Constants
 SOLANA_RPC_URL = "https://api.mainnet-beta.solana.com"
