@@ -1,6 +1,6 @@
 import streamlit as st
-from solana_agent_kit import SolanaAgentKit
-from solana_agent_kit import create_solana_tools
+from solana_agent_kit_py import SolanaAgentKit
+from solana_agent_kit_py import create_solana_tools
 
 # Initialize with private key and optional RPC URL
 agent = SolanaAgentKit(
