@@ -1,3 +1,5 @@
 streamlit
-solana-agent-kit-py
- 
+solana_agent_kit
+solana-py
+spl-token-py
+metaplex-python-sdk

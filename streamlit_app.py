@@ -1,12 +1,18 @@
 import streamlit as st
-from solana_agent_kit import SolanaAgentKit
+from solana_agent_kit.agent import SolanaAgentKit
+from solana_agent_kit.langchain import create_solana_tools
 
-async def main():
-    agent = SolanaAgentKit(
-        "your-wallet-private-key-as-base58",
-        "https://api.mainnet-beta.solana.com",
-        "your-openai-api-key"
-    )
+# Initialize with private key and optional RPC URL
+agent = SolanaAgentKit(
+    "your-wallet-private-key-as-base58",
+    "https://api.mainnet-beta.solana.com",
+    "your-openai-api-key"
+)
+
+# Create LangChain tools
+tools = create_solana_tools(agent)
+
+
 
 # Constants
 SOLANA_RPC_URL = "https://api.mainnet-beta.solana.com"
