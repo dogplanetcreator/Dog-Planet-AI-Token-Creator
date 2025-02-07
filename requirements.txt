@@ -2,5 +2,5 @@ streamlit
 flask
 solana
 solders
-spl_token
+solana_agentkit 
 base58

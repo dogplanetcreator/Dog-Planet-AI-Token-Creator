@@ -1,18 +1,17 @@
+from flask import Flask, request, jsonify
 from solana.rpc.api import Client
 from solana.transaction import Transaction
 from solana.system_program import transfer, TransferParams
-from spl.token.client import Token
-from spl.token.constants import TOKEN_PROGRAM_ID
-from spl.token.instructions import mint_to, create_mint
 from solders.pubkey import Pubkey
+from solana_agentkit import AgentKit
 import base58
-from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
 # Connect to Solana Devnet or Mainnet
 SOLANA_RPC_URL = "https://api.mainnet-beta.solana.com"  # Change to devnet if needed
 client = Client(SOLANA_RPC_URL)
+agent = AgentKit(SOLANA_RPC_URL)
 
 # Public key for fee receiver
 FEE_RECEIVER_PUBKEY = Pubkey("YOUR_FEE_RECEIVER_PUBLIC_KEY")
@@ -24,27 +23,12 @@ def charge_fee(signed_tx):
 
 # Create Token Mint
 def create_token_mint(authority_pubkey):
-    token = Token.create_mint(
-        client,
-        authority_pubkey,
-        authority_pubkey,
-        9,  # Decimals
-        TOKEN_PROGRAM_ID
-    )
-    return token.pubkey
+    token_mint = agent.create_token_mint(authority_pubkey, authority_pubkey, 9)
+    return token_mint
 
 # Mint tokens to an account
 def mint_tokens(token_mint, recipient_pubkey, amount, authority_pubkey):
-    tx = Transaction()
-    tx.add(
-        mint_to(
-            mint=token_mint,
-            dest=recipient_pubkey,
-            authority=authority_pubkey,
-            amount=amount
-        )
-    )
-    response = client.send_transaction(tx, authority_pubkey)
+    response = agent.mint_tokens(token_mint, recipient_pubkey, amount, authority_pubkey)
     return response
 
 # Create Raydium Pool (Placeholder, requires interaction with Raydium SDK)
