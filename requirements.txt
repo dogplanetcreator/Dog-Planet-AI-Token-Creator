@@ -1,2 +1,6 @@
 streamlit
-solana-agent-kit-py
+flask
+solana
+solders
+spl-token
+base58
