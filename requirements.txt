@@ -2,5 +2,5 @@ streamlit
 flask
 solana
 solders
-spl-token
+spl_token
 base58
